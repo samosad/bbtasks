@@ -1,6 +1,6 @@
 var assert = chai.assert;
 
 mocha.setup({
-	ui: 'tdd',
-	globals: ['bTask']
+  ui: 'tdd',
+  globals: ['bTask']
 });

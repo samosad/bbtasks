@@ -1,14 +1,14 @@
 // app.js
 "use strict";
 
-define([], function () {
-	var App = function() {
-		// body...
-	};
+define([], function() {
+  var App = function() {
+    // body...
+  };
 
-	App.prototype = {
+  App.prototype = {
 
-	};
+  };
 
-	return App;
+  return App;
 });
