@@ -14,6 +14,6 @@
     "grunt-exec": "latest"
   },
   "scripts": {
-    "grunt": "node_modules/.bin/grunt"
+    "grunt": "node_modules\\.bin\\grunt"
   }
 }

@@ -4,7 +4,7 @@ module.exports = function(grunt) {
   grunt.initConfig({
     exec: {
       build: {
-        command: 'node node_modules/requirejs/bin/r.js -o requirejs-config.js'
+        command: 'node node_modules/requirejs/bin/r.js -o require-config.js'
       }
     }
   });

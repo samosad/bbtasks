@@ -1,14 +1,17 @@
 // app.js
-"use strict";
 
-define([], function() {
-  var App = function() {
-    // body...
-  };
+define(['gapi'],
 
-  App.prototype = {
+  function(ApiManager) {
+    var App = function() {
+      this.connectGapi();
+    };
 
-  };
+    App.prototype = {
+      connectGapi: function() {
+        this.apiManager = new ApiManager();
+      }
+    };
 
-  return App;
-});
+    return App;
+  });
