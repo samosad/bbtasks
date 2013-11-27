@@ -1,7 +1,10 @@
 // gapi.js
 
 define(['config'], function(config) {
-  function ApiManager() {
+  var app;
+
+  function ApiManager(_app) {
+    app = _app;
     this.loadGapi();
   }
 
@@ -19,7 +22,7 @@ define(['config'], function(config) {
       window.setTimeout(checkAuth, 100);
     }
 
-    function chechAuth() {
+    function checkAuth() {
       gapi.auth.authorize({
         client_id: config.clientId,
         scope: config.scopes,
@@ -28,8 +31,36 @@ define(['config'], function(config) {
     }
 
     function handleAuthResult(authResult) {
-      // body...
+      var authTimeout;
+
+      if (authResult && !authResult.error) {
+        // Schedule a check when the authentication token expires
+        if (authResult.expires_in) {
+          authTimeout = (authResult.expires_in - 5 * 60) * 1000;
+          setTimeout(checkAuth, authTimeout);
+        }
+
+        app.views.auth.$el.hide();
+        $('#signed-in-container').show();
+      } else {
+        if (authResult && authResult.error) {
+          // TODO: Show error
+          console.error('Unable to sign in:', authResult.error);
+        }
+
+        app.views.auth.$el.show();
+      }
     }
+
+    this.checkAuth = function() {
+      gapi.auth.authorize({
+        client_id: config.clientId,
+        scope: config.scopes,
+        immeditate: false
+      }, handleAuthResult);
+    };
+
+    handleClientLoad();
   };
 
   ApiManager.prototype.loadGapi = function() {
@@ -49,9 +80,9 @@ define(['config'], function(config) {
           } else {
             setTimeout(checkGAPI, 100);
           }
-
-          checkGAPI();
         }
+
+        checkGAPI();
       });
   };
 
