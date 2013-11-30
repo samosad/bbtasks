@@ -33,7 +33,7 @@ define([
         self.collections.lists.fetch({
           data: { userId: '@me' },
           success: function(res) {
-            self.views.listMenu.render();
+//            self.views.listMenu.render();
           }
         });
       });
