@@ -17,11 +17,18 @@ define([
     renderMenuItem: function(model) {
       var item = new ListMenuItemView({ model: model });
       this.$el.append(item.render().el);
+
+      if (!bTask.views.activeListMenuItem) {
+        bTask.views.activeListMenuItem = item;
+      }
+
+      if (model.get('id') === bTask.views.activeListMenuItem.model.get('id')) {
+        item.open();
+      }
     },
 
     render: function() {
-      var $el = $(this.el)
-        , self = this;
+      var self = this;
 
       this.collection.each(function(list) {
         self.renderMenuItem(list);

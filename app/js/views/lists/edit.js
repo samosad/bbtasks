@@ -16,8 +16,7 @@ define([
     },
 
     render: function() {
-      var $el = $(this.el);
-      $el.html(this.template(this.model.toJSON()));
+      this.$el.html(this.template(this.model.toJSON()));
 
       if (!this.model.get('id')) {
         this.$el.find('legend').html('Add List');

@@ -31,10 +31,7 @@ define([
       this.apiManager = new ApiManager(this);
       this.apiManager.on('ready', function() {
         self.collections.lists.fetch({
-          data: { userId: '@me' },
-          success: function(res) {
-//            self.views.listMenu.render();
-          }
+          data: { userId: '@me' }
         });
       });
     }

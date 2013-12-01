@@ -17,14 +17,19 @@ define([
     },
 
     render: function() {
-      var $el = $(this.el);
-      $el.data('listId', this.model.get('id'));
-      $el.html(this.template(this.model.toJSON()));
+      this.$el.data('listId', this.model.get('id'));
+      this.$el.html(this.template(this.model.toJSON()));
       return this;
     },
 
     open: function() {
-      var self = this;
+      if (bTask.views.activeListMenuItem) {
+        bTask.views.activeListMenuItem.$el.removeClass('active');
+      }
+
+      bTask.views.activeListMenuItem = this;
+      this.$el.addClass('active');
+
       return false;
     }
   });
