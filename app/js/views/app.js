@@ -26,7 +26,7 @@ define([
     },
 
     listForm: function (form) {
-      this.$el.find('#list-editor').html(form.render().el);
+      this.$el.find('#list-editor').html(form.render().el).show();
       form.$el.find('input:first').focus();
 
       return false;

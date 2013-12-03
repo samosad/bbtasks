@@ -5,8 +5,9 @@ define([
   'views/app',
   'views/auth',
   'views/lists/menu',
-  'collections/tasklists'
-], function(ApiManager, AppView, AuthView, ListMenuView, TaskLists) {
+  'collections/tasklists',
+  'collections/tasks'
+], function(ApiManager, AppView, AuthView, ListMenuView, TaskLists, Tasks) {
   var App = function() {
     this.views.app = new AppView();
     this.views.app.render();
@@ -15,6 +16,7 @@ define([
     this.views.auth.render();
 
     this.collections.lists = new TaskLists();
+    this.collections.tasks = new Tasks();
     this.views.listMenu = new ListMenuView({
       collection: this.collections.lists
     });
@@ -31,7 +33,10 @@ define([
       this.apiManager = new ApiManager(this);
       this.apiManager.on('ready', function() {
         self.collections.lists.fetch({
-          data: { userId: '@me' }
+          data: { userId: '@me' },
+          success: function(collection, res, req) {
+//            self.views.listMenu.render();
+          }
         });
       });
     }
