@@ -13,17 +13,21 @@
 </head>
 
 <body>
+  <div id="todo-app"></div>
   <div id="mocha"></div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
   <script src="/node_modules/chai/chai.js"></script>
   <script src="/node_modules/mocha/mocha.js"></script>
   <script src="/js/lib/require.js"></script>
   <script src="/js/main.js"></script>
+  <script src="lib/sinon-1.5.2.js"></script>
+  <script src="fixtures/gapi.js"></script>
   <script src="setup.js"></script>
   <script src="app.test.js"></script>
+  <script src="lists.test.js"></script>
   <script>
   require(['app'], function() {
-    mocha.run();
+    bTask.apiManager.on('ready', function() { mocha.run() });
   });
   </script>
 </body>

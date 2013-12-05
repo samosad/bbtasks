@@ -1,7 +1,8 @@
 define([
   'text!templates/lists/menuitem.html',
-  'views/tasks/index'
-], function(template, TasksIndexView) {
+  'views/tasks/index',
+  'collections/tasks'
+], function(template, TasksIndexView, Tasks) {
   var ListMenuItemView = Backbone.View.extend({
     tagName: 'li',
     className: 'list-menu-item',
@@ -37,11 +38,11 @@ define([
       }
 
       bTask.views.tasksIndexView = new TasksIndexView({
-        collection: bTask.collections.tasks,
+        collection: new Tasks({ tasklist: this.model.get('id') }),
         model: this.model
       });
-      bTask.views.tasksIndexView.render();
-      bTask.views.app.$el.find('#tasks-container').html(bTask.views.tasksIndexView.el);
+
+      bTask.views.app.$el.find('#tasks-container').html(bTask.views.tasksIndexView.render().el);
 
       return false;
     }

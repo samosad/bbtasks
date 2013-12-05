@@ -7,7 +7,7 @@ define([
     id: 'main',
     tagName: 'div',
     className: 'container-fluid',
-    el: 'body',
+    el: '#todo-app',
     template: _.template(template),
 
     events: {
