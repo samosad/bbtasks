@@ -56,6 +56,25 @@ define([
       this.$el.find('#selected-task').append(this.taskEditView.render().el);
     },
 
+    makeSortable: function() {
+      var $el = this.$el.find('#task-list');
+      if (this.collection.length) {
+        $el.sortable('destroy');
+        $el
+          .sortable({ handle: '.handle' })
+          .bind('sortupdate', _.bind(this.saveTaskOrder, this));
+      };
+    },
+
+    saveTaskOrder: function(e, o) {
+      var id = $(o.item).find('.check-task').data('taskId'),
+          previous = $(o.item).prev(),
+          previousId = previous.length ? $(previous).find('.check-task').data('taskId') : null,
+          request;
+
+      this.collection.move(id, previousId, this.model);
+    },
+
     render: function() {
       this.$el.html(this.template());
 
@@ -70,6 +89,8 @@ define([
             task.set('tasklist', self.model.get('id'));
             self.renderTask(task);
           });
+          
+          self.makeSortable();
         }
       });
 

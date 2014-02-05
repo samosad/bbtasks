@@ -118,3 +118,10 @@ li.active {
 .well {
   background-color: rgba(125, 155, 125, .25)
 }
+
+li.sortable-placeholder { 
+  border: 1px dashed #CCC;
+  background: none; 
+  height: 28px; 
+  margin: 5px 0;
+}
